@@ -172,6 +172,11 @@
 		<role-name>user</role-name>
 	</security-role>
 
+	<security-role>
+		<description>NOC Admins</description>
+		<role-name>Infrastructure Documentation Viewers</role-name>
+	</security-role>
+
 	<!-- Open resources for login page. -->
 	<security-constraint>
 		<web-resource-collection>
@@ -193,6 +198,7 @@
 		<auth-constraint>
 			<role-name>admin</role-name>
 			<role-name>user</role-name>
+			<role-name>Infrastructure Documentation Viewers</role-name>
 		</auth-constraint>
 	</security-constraint>
 
@@ -207,6 +213,7 @@
 		<auth-constraint>
 			<role-name>admin</role-name>
 			<role-name>user</role-name>
+			<role-name>Infrastructure Documentation Viewers</role-name>
 		</auth-constraint>
 	</security-constraint>
 

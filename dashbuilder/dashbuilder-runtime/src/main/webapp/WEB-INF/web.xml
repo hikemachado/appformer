@@ -41,6 +41,19 @@
     </init-param>
   </servlet>
 
+  <servlet>
+    <servlet-name>UberfireFileDownloadServlet</servlet-name>
+    <servlet-class>org.uberfire.server.FileDownloadServlet</servlet-class>
+    <init-param>
+      <param-name>includes-path</param-name>
+      <param-value>git://**,default://**,file://**</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UberfireFileDownloadServlet</servlet-name>
+    <url-pattern>/org.dashbuilder.DashbuilderRuntime/defaulteditor/download/*</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>LoginRedirectServlet</servlet-name>
     <url-pattern>/login</url-pattern>
@@ -136,8 +149,5 @@
       <url-pattern>/plugins/*</url-pattern>
       <url-pattern>/dashbuilder/component/*</url-pattern>
     </web-resource-collection>
-    <auth-constraint>
-      <role-name>admin</role-name>
-    </auth-constraint>
   </security-constraint>
 </web-app>

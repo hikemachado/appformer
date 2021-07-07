@@ -16,16 +16,6 @@
 
 package org.uberfire.java.nio.fs.jgit.daemon.ssh;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-
 import org.apache.sshd.common.cipher.BuiltinCiphers;
 import org.apache.sshd.common.mac.BuiltinMacs;
 import org.apache.sshd.common.util.security.SecurityUtils;
@@ -42,6 +32,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.uberfire.java.nio.fs.jgit.JGitFileSystemProvider;
 import org.uberfire.java.nio.security.SSHAuthenticator;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
 
 import static org.apache.sshd.common.NamedFactory.setUpBuiltinFactories;
 import static org.apache.sshd.server.ServerBuilder.builder;
@@ -244,6 +240,10 @@ public class GitSSHService {
     public void stop() {
         try {
             sshd.stop(true);
+        } catch (java.net.BindException be) {
+            if(be.getMessage().contains("Address already in use")) {
+                System.out.println("Address already in use at " + sshd.getHost() + ":" + sshd.getPort());
+            }
         } catch (IOException ignored) {
         }
     }

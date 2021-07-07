@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2015 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,28 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dashbuilder.client.navbar;
 
-import org.uberfire.client.workbench.widgets.menu.megamenu.brand.MegaMenuBrand;
+package org.dashbuilder.backend.exception;
 
-import javax.enterprise.context.ApplicationScoped;
+import java.io.Serializable;
 
-@ApplicationScoped
-public class DashbuilderNavBrand implements MegaMenuBrand {
+/**
+ * <p>Root of all portable Exceptions resulting from server-side errors that need to be sent to the client.</p> 
+ * @since 0.3.0
+ */
+public class GenericPortableException extends RuntimeException implements Serializable {
 
-    @Override
-    public String brandImageUrl() {
-        return "./images/priax_logo_small.png";
+    public GenericPortableException() {
     }
 
-    @Override
-    public String brandImageLabel() {
-        return "Dashbuilder";
+    public GenericPortableException(final String message ) {
+        super( message );
     }
 
-    @Override
-    public String menuAccessorLabel() {
-        return "Menu";
+    public GenericPortableException(final String message, Exception e ) {
+        super( message, e );
     }
 
 }

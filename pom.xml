@@ -1348,6 +1348,11 @@
       <version>${version.org.assertj}</version>
     </dependency>
 
+      <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>d3-array</artifactId>
+        <version>2.6.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

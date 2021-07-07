@@ -16,16 +16,15 @@
 
 package org.uberfire.server.cdi;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-
 import org.jboss.errai.security.shared.api.identity.User;
 import org.jboss.errai.security.shared.service.AuthenticationService;
 import org.uberfire.rpc.SessionInfo;
 import org.uberfire.rpc.impl.SessionInfoImpl;
+
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import static org.jboss.errai.bus.server.api.RpcContext.getMessage;
 import static org.jboss.errai.bus.server.api.RpcContext.getQueueSession;
@@ -35,9 +34,9 @@ public class UberFireGeneralFactory {
     @Inject
     private Instance<User> user;
 
-    @Produces
+    //@Produces
     @RequestScoped
-    @Default
+    @Named("uberSessionInfo")
     public SessionInfo getSessionInfo(AuthenticationService authenticationService) {
         String sessionId = getSessionId();
         User user;

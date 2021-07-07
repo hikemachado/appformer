@@ -15,13 +15,14 @@
  */
 package org.uberfire.java.nio.fs.jgit;
 
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.uberfire.commons.config.ConfigProperties;
+import org.uberfire.java.nio.fs.jgit.util.EnvProperties;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
 import static org.eclipse.jgit.lib.Constants.DEFAULT_REMOTE_NAME;
@@ -96,9 +97,9 @@ public class JGitFileSystemProviderConfiguration {
     public static final String DEFAULT_SSH_OVER_HTTP = "false";
     public static final String DEFAULT_SSH_OVER_HTTPS = "false";
     public static final String DEFAULT_HOST_ADDR = "127.0.0.1";
-    public static final String DEFAULT_DAEMON_DEFAULT_ENABLED = "false";
+    public static final String DEFAULT_DAEMON_DEFAULT_ENABLED = "true";
     public static final String DEFAULT_DAEMON_DEFAULT_PORT = "9418";
-    public static final String DEFAULT_SSH_ENABLED = "true";
+    public static final String DEFAULT_SSH_ENABLED = "false";
     public static final String DEFAULT_HTTP_ENABLED = "true";
     public static final String DEFAULT_HTTPS_ENABLED = "false";
     public static final String DEFAULT_HTTP_PORT = "8080";
@@ -181,7 +182,7 @@ public class JGitFileSystemProviderConfiguration {
         final ConfigProperties.ConfigProperty bareReposDirProp = systemConfig.get(GIT_NIO_DIR,
                                                                                   currentDirectory);
         final ConfigProperties.ConfigProperty reposDirNameProp = systemConfig.get(GIT_NIO_DIR_NAME,
-                                                                                  REPOSITORIES_CONTAINER_DIR);
+                                                                                    EnvProperties.getInstace().getProperty("git.repository.folder"));
         final ConfigProperties.ConfigProperty enabledProp = systemConfig.get(GIT_DAEMON_ENABLED,
                                                                              DEFAULT_DAEMON_DEFAULT_ENABLED);
         final ConfigProperties.ConfigProperty hostProp = systemConfig.get(GIT_DAEMON_HOST,
