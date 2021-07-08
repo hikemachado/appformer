@@ -22,7 +22,9 @@ import org.uberfire.rpc.SessionInfo;
 import org.uberfire.rpc.impl.SessionInfoImpl;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -34,9 +36,9 @@ public class UberFireGeneralFactory {
     @Inject
     private Instance<User> user;
 
-    //@Produces
+    @Produces
     @RequestScoped
-    @Named("uberSessionInfo")
+    @Default
     public SessionInfo getSessionInfo(AuthenticationService authenticationService) {
         String sessionId = getSessionId();
         User user;

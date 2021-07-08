@@ -16,27 +16,32 @@
 
 package org.uberfire.backend.server.plugins;
 
+import org.jboss.errai.bus.server.annotations.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.uberfire.backend.plugin.RuntimePlugin;
 import org.uberfire.backend.plugin.RuntimePluginProcessor;
+import org.uberfire.backend.plugin.RuntimePluginService;
 import org.uberfire.backend.server.plugins.processors.HTMLPluginProcessor;
+import org.uberfire.commons.services.cdi.Startup;
+import org.uberfire.commons.services.cdi.StartupType;
 import org.uberfire.java.nio.file.DirectoryStream;
 import org.uberfire.java.nio.file.Files;
 import org.uberfire.java.nio.file.Path;
 import org.uberfire.java.nio.file.Paths;
 import org.uberfire.spaces.SpacesAPI;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import java.net.URI;
 import java.util.*;
 
-//@Service
-//@ApplicationScoped
-//@Startup(StartupType.BOOTSTRAP)
-public class RuntimePluginServiceImpl {
+@Service
+@ApplicationScoped
+@Startup(StartupType.BOOTSTRAP)
+public class RuntimePluginServiceImpl implements RuntimePluginService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RuntimePluginServiceImpl.class);
 
@@ -50,19 +55,19 @@ public class RuntimePluginServiceImpl {
     @Inject
     SpacesAPI spaces;
 
-    //@Override
+    @Override
     public Collection<String> listFrameworksContent() {
         return directoryContent("frameworks",
                                 "*.js");
     }
 
-    //@Override
+    @Override
     public Collection<String> listPluginsContent() {
         return directoryContent("plugins",
                                 "*.js");
     }
 
-    //@Override
+    @Override
     public String getTemplateContent(String url) {
 
         String pluginTemplateContent = getRuntimePluginTemplateContent(url);
@@ -117,7 +122,7 @@ public class RuntimePluginServiceImpl {
         return result;
     }
 
-    //@Override
+    @Override
     public String getRuntimePluginTemplateContent(String pluginName) {
         if (htmlPluginProcessor.isRegistered(pluginName)) {
             Optional<RuntimePlugin> runtimePlugin = htmlPluginProcessor.lookupForTemplate(pluginName);
@@ -128,7 +133,7 @@ public class RuntimePluginServiceImpl {
         return "";
     }
 
-    //@Override
+    @Override
     public List<RuntimePlugin> getRuntimePlugins() {
         List<RuntimePlugin> runtimePlugins = new ArrayList<>();
 
